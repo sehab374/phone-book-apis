@@ -9,6 +9,7 @@ export const signup = async (req: Request, res: Response) => {
     const user = await AuthService.signup(req.body);
     res.json(user);
   } catch (error: any) {
+    console.log(error);
     if (error.message === "User already exists") {
       return res.status(409).json({ error: error.message });
     }
@@ -26,6 +27,7 @@ export const login = async (req: Request, res: Response) => {
     const { user, token } = await AuthService.login(email, password);
     res.json({ user, token });
   } catch (error: any) {
+    console.log(error);
     res.status(500).json({ error: "Internal Server Error" });
   }
 };
